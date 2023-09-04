@@ -1,0 +1,646 @@
+Action Tags
+============
+Action tags are used to perform perticular task.
+
+Action tags are used to control the flow of the pages and to use java bean.
+
+Action tags internally uses Servlet API features.
+
+All action tags executed dynamically at runtime.
+
+We have only xml tags and we don't any standard tags. 
+
+Action tags are divided into two types.
+
+1)Standard Action tags
+
+2)Custom Action tags 
+
+1)Standard Action tags
+-------------------------
+Built-In tags are called standard action tags.
+ex:
+	<jsp:forward>
+	<jsp:include>
+	<jsp:useBean>
+	<jsp:setProperty>
+	<jsp:getProperty>
+	and etc.
+
+Action forward
+==============
+In action forward, the output of source jsp program will be discarded and output of destination jsp program goes to browser window as dynamic response.
+
+It internally uses servlet API functionality called rd.forward(req,res). 
+
+syntax:
+	<jsp:forward page="page_name"/>
+
+Deployment Directory structure
+------------------------------
+JspApp6
+|
+|---Java Resources
+|
+|---Web Content
+|	|
+	|---A.jsp
+	|
+	|---B.jsp
+	|
+	|-----WEB-INF
+		|
+		|---web.xml 
+Note:
+-----
+In above application we need to add "servlet-api.jar" file in project build path.
+
+A.jsp
+-------
+<b><i>Begining of A.jsp</i></b>
+<br>
+<jsp:forward page="B.jsp"/>
+<br>
+<b><i>Ending of A.jsp</i></b>
+
+B.jsp
+-----
+<b><i>This is B.jsp program</i></b>
+
+web.xml
+--------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>A.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+request url
+----------
+	http://localhost:2525/JspApp6/	
+
+Action Include
+==============
+In action include, the output of source jsp program and output of destination jsp program combinely goes to browser window as dynamic response.
+
+It internally uses servlet API functionality called rd.include(req,res). 
+
+syntax:
+	<jsp:include page="page_name"/>
+
+Deployment Directory structure
+------------------------------
+JspApp7
+|
+|---Java Resources
+|
+|---Web Content
+|	|
+	|---A.jsp
+	|
+	|---B.jsp
+	|
+	|-----WEB-INF
+		|
+		|---web.xml 
+Note:
+-----
+In above application we need to add "servlet-api.jar" file in project build path.
+
+A.jsp
+------
+<b><i>Begining of A.jsp program</i></b>
+<br>
+<jsp:include page="B.jsp"/>
+<br>
+<b><i>Ending of A.jsp program</i></b>
+
+B.jsp
+-----
+<b><i>This is B.jsp program</i></b>
+
+web.xml
+------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>A.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+Request url
+-----------
+	http://localhost:2525/JspApp7/
+
+
+JSP to Java Bean Communication
+================================
+JSP to java bean communication is possible by using three tags.
+
+1)<jsp:useBean> tag 
+--------------------
+	It is used to create and locate bean class object.
+
+2)<jsp:setProperty> tag 
+------------------------
+	It will call setter method and set the value to bean class object.
+
+3)<jsp:getProperty> tag 
+------------------------
+	It will call getter method and get the value from bean class object.
+
+Note:
+-----
+All the above tags are independent tags.
+
+
+ex:1
+----
+Deployment Directory structure
+-------------------------------
+JspApp8
+|
+|-----Java Resources
+|	|
+	|-----src
+		|
+		|----com.ihub.www
+			|
+			|-----CubeNumber.java
+|
+|-----Web Content
+	|
+	|-----process.jsp
+	|
+	|-----WEB-INF
+		|
+		|-----web.xml 
+Note:
+------
+In above application we need to add "servlet-api.jar" file in project build path.
+
+process.jsp
+------------
+<jsp:useBean id="cn" class="com.ihub.www.CubeNumber"></jsp:useBean>
+
+<%= "Cube of a given number is ="+cn.cube(5) %>
+
+web.xml
+----------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>process.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+CubeNumber.java
+----------------
+package com.ihub.www;
+
+public class CubeNumber 
+{
+	public int cube(int n)
+	{
+		return n*n*n;
+	}
+}
+
+Request url
+---------
+	http://localhost:2525/JspApp8/
+	
+
+ex:2
+------
+
+Deployment Directory structure
+-------------------------------
+JspApp9
+|
+|-----Java Resources
+|	|
+	|-----src
+		|
+		|----com.ihub.www
+			|
+			|-----User.java
+|
+|-----Web Content
+	|
+	|-----form.html
+	|
+	|-----process.jsp
+	|
+	|-----WEB-INF
+		|
+		|-----web.xml 
+Note:
+------
+In above application we need to add "servlet-api.jar" file in project build path.
+
+form.html
+---------
+
+<form action="process.jsp">
+
+	UserName: <input type="text" name="username"/> <br>
+	
+	Password: <input type="password" name="password"/> <br>
+	
+	Email: <input type="text" name="email"/> <br>
+	
+	<input type="submit" value="submit"/>
+	
+</form>
+
+process.jsp
+------------
+<jsp:useBean id="u" class="com.ihub.www.User"></jsp:useBean>
+
+<jsp:setProperty property="*" name="u"/>
+
+Records are  <br>
+
+UserName :<jsp:getProperty property="username" name="u"/> <br>
+Password :<jsp:getProperty property="password" name="u"/> <br>
+Email    :<jsp:getProperty property="email" name="u"/> <br>
+
+web.xml
+---------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>form.html</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+User.java
+---------
+package com.ihub.www;
+
+public class User 
+{
+	private String username;
+	private String password;
+	private String email;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+}
+
+Request url
+-------------
+	http://localhost:2525/JspApp9/	
+
+
+
+
+2)Custom Action tags 
+-----------------------
+Tags which are created by ther user based on the application requirement are called custom tags.
+
+To create a custom tags in jsp we need to use taglib directive.
+
+syntax:
+	<%@ taglib uri="uriofthetaglibrary" prefix="prefixoftaglibrary" %>
+
+
+Deployment Directory structure
+-------------------------------
+JspApp10
+|
+|-----Java Resources
+|	|
+	|-----src
+		|
+		|----com.ihub.www
+			|
+			|-----CubeNumber.java
+|
+|-----Web Content
+	|
+	|-----process.jsp
+	|
+	|-----WEB-INF
+		|
+		|-----mytags.tld
+		|
+		|-----web.xml 
+		|
+		|------lib
+			|
+			|----jsp-api.jar
+Note:
+------
+In above application we need to add "servlet-api.jar" and "jsp-api.jar" file in project build path.
+
+Copy and paste "jsp-api.jar" file inside "WEB-INF/lib" folder seperately.
+
+Here TLD stands for Tag Library Descriptor.
+
+process.jsp
+----------
+
+<%@taglib uri="/WEB-INF/mytags.tld" prefix="ihub" %>
+
+<ihub:cube number="5"/>  
+
+web.xml
+-------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+ 	
+ 	<welcome-file-list>
+ 		<welcome-file>process.jsp</welcome-file>
+ 	</welcome-file-list>
+ 
+</web-app>
+
+mytags.tld
+-----------
+
+    <!DOCTYPE taglib  
+            PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"  
+            "http://java.sun.com/j2ee/dtd/web-jsptaglibrary_1_2.dtd">  
+      
+    <taglib>  
+      <tlib-version>1.0</tlib-version>  
+      <jsp-version>1.2</jsp-version>  
+      <short-name>simple</short-name>  
+      <uri>mytags</uri>  
+      <description>A simple tab library for the examples</description>  
+      
+      <tag>
+      	<name>cube</name>
+      	<tag-class>com.ihub.www.CubeNumber</tag-class>
+      	<attribute>
+      		<name>number</name>
+      		<required>true</required>
+      	</attribute>
+      </tag>
+ 
+       
+    </taglib>  
+    
+CubeNumber.java
+----------------
+package com.ihub.www;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.TagSupport;
+
+public class CubeNumber extends TagSupport
+{
+	private int number;
+	
+	//setter method
+	public void setNumber(int number)
+	{
+		this.number=number;
+	}
+	
+	public int doStartTag()throws JspException
+	{
+		try
+		{
+			JspWriter out=pageContext.getOut();
+			out.println(number*number*number);	
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return SKIP_BODY;
+	}
+}
+
+Request url
+----------
+	http://localhost:2525/JspApp10/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

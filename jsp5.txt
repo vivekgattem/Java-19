@@ -1,0 +1,339 @@
+Realtime Tools 
+==============
+
+> Junit 
+======
+Junit is a unit testing framework.
+
+Unit testing is used to test the small piece of code, working as per the requirement or not.
+
+To perform unit testing we need to create test case or test suit.
+
+A developer is responsible to perform unit testing.
+
+
+Steps to perform Junit test cases
+----------------------------------
+step1:
+	create a project.
+	ex:
+	file --> project --> java project --> next -->
+	project Name : JunitProject -->next --> finish
+
+step2:
+	create "com.ihub.www" package inside the project.
+	ex:
+		right click to src folder--> new ---> package
+		--> name : com.ihub.www---> finish.
+
+step3:
+	create a DemoApp program with two methods.
+	ex:
+		right click to com.ihub.www-> class -->
+		Name : DemoApp --> finish.
+
+DemoApp.java
+-------------
+package com.ihub.www;
+
+public class DemoApp {
+	
+	public String concatinate(String s1,String s2)
+	{
+		return s1+s2;
+	}
+
+	public int sum(int a,int b)
+	{
+		return a+b;
+	}
+}
+
+
+step4:
+-----
+	Create Junit test cases on methods.
+	ex:
+	right click to DemoApp.java program --> new -->
+	others --> Junit --> Junit testcases -->next -->
+	next--> select on concatination and sum method -->finish-->ok.
+
+
+step5:
+	Write the logics for Test cases.
+	ex:
+DemoAppTest.java
+------------------
+package com.ihub.www;
+
+import junit.framework.TestCase;
+
+public class DemoAppTest extends TestCase {
+
+	public void testConcatinate() {
+		DemoApp da=new DemoApp();
+		String result=da.concatinate("ihub","talent");
+		assertEquals("ihubtalent", result);
+	}
+
+	public void testSum() {
+		DemoApp da=new DemoApp();
+		int result=da.sum(10, 20);
+		assertEquals(30,result);
+	}
+
+}
+	
+step6:
+------
+	Run the test cases.
+	ex:
+	rightclick to DemoAppTest.java --> debug as --> Junit test case
+	
+Note:
+	Green color indicates testcases done successfully.
+	brown color indicates test cases are unsuccessfull.
+
+
+
+> Maven 
+========
+Maven is a project building management tool.
+
+Maven contains POM.xml file where we will add all the dependencies.
+
+Here POM stands for Project Object Model.	
+
+POM.xml file contains dependencies, goals ,dependency descriptors and other information etc.
+
+Steps to develop Maven Project
+-------------------------------
+step1:
+	Open eclipse IDE by choosing workspace location.
+
+step2:
+	create a "Dynamic web project" i.e MavenProj.
+	ex:
+	File-->new --> dynamic web project -->Project : MavenProject
+	---> select 3.0 as dynamic web module version -->next-->next-->
+	generate web.xml file --> finish.
+
+step3:
+-----
+	Convert Dynamic web project to Maven Project.
+	ex:
+	Right click to project --> configure--> convert to maven project
+	--->group Id :com.ihub.www 
+	--->artifact id : MavenProj
+	--->Name : MavenProj
+	-->description: My First Maven Project --> finish.	
+
+step4:
+----
+	add "servlet-api" maven dependency in pom.xml file
+	ex:
+	pom.xml
+	-------
+	--
+	--
+	<dependencies>
+  		<dependency>
+    			<groupId>javax.servlet</groupId>
+    			<artifactId>servlet-api</artifactId>
+    			<version>2.5</version>
+    			<scope>provided</scope>
+		</dependency>
+  	</dependencies>
+  
+  	<build>	
+	-
+	-
+	-
+
+
+step5:
+-----
+	Create ABC.jsp file in "Web Content " folder.
+	ex:
+	ABC.jsp
+	--------
+	<center>
+	<h1>
+		<%
+			java.util.Date d=new java.util.Date();
+			out.println(d);
+		%>
+	</h1>
+	</center>	
+
+
+step6:
+------
+	Add "ABC.jsp file" as welcome file in web.xml file
+	ex:
+	web.xml
+	-------
+	<?xml version="1.0" encoding="UTF-8"?>
+	<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xmlns="http://java.sun.com/xml/ns/javaee" 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" 	version="2.5">
+  
+  	<welcome-file-list>
+ 		<welcome-file>ABC.jsp</welcome-file>
+  	</welcome-file-list>
+  
+	</web-app>
+
+
+step 7:
+-------
+	Run the Maven project.
+	ex:
+	Right click to project -->run as --> run on server -->
+	Select Tomcat7.0 --> next -->  finish.
+
+
+step8:
+------
+	Test the project by using below request url.
+	ex:
+	http://localhost:2525/Maven/
+
+
+> GIT/GITHUB 
+============
+GIT is a distributed version control system in which we can track the changes in each file during the parallel development process.
+
+GITHUB is a hosting server for git.
+
+GIT is a installable software which contains local repository.
+
+GITHUB is a web application with GUI which contains remote repository.
+
+
+Steps to push the code to Git repository
+------------------------------------------
+step1:
+	create an account in GITHUB.
+	ex:
+		https://github.com/
+
+step2:
+	Sign in with username and password.
+	ex:
+		username : NiyazulHasan
+		password : ******
+
+step3:
+------
+	create a repository in GIThub.
+	ex:
+		start project --> repository Name : ih-java-019
+		---> create repository --> 
+
+	link : https://github.com/NiyazulHasan/ih-java-019
+		
+
+step4:
+-----
+	Install GIT software in our local machine.
+	ex:
+		https://git-scm.com/downloads
+	
+	
+step5:
+--------
+	create "myproject" folder and keep Mavenproj.war file.
+
+
+step6:
+-----
+	Open the git bash from that location.
+
+step7:
+------
+	Initialized empty Git repository.
+	ex:
+		bash> git init
+
+
+step8:
+-----
+	See the current branch name of local repository .
+	ex:
+		bash> git branch
+
+step9:
+----
+	Move from master branch to main branch.
+	ex:
+		bash> git branch --move master main
+
+step10:
+-----
+	Up stream the main branch.
+	ex:
+		bash> git push --set-upstream origin main
+
+
+step11:
+-----
+	To check the status in git.
+	ex:
+		bash> git status
+step12:
+-------
+	Add the folders and files to commit.
+	ex:
+		bash> git add .
+		
+step13:
+------
+	Again check the status in git.
+	ex:
+		bash> git status
+
+step14:
+--------
+	commit the files into master branch.
+	ex:
+		bash> git commit -m "My Project"
+
+step15:
+--------
+	add remote origin to git.
+	ex:
+	bash> git remote add origin https://github.com/NiyazulHasan/ih-java-019
+
+step16:
+-------
+	push the project to master branch.
+	ex:
+		bash> git push origin main
+		or
+		bash> git push -f origin main
+
+step17:
+--------
+	Goto github reposority and represent the web page
+	ex:
+		https://github.com/NiyazulHasan/ih-java-019
+
+step18:
+------
+	We can clone the project by using below command.
+	ex:
+		bash> git clone  https://github.com/NiyazulHasan/ih-java-019
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
